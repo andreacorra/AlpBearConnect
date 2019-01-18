@@ -1,9 +1,9 @@
 This folder containes the codes used to prepare the variables.
 
-* [Rock classification](#Rock)
+* [Land use classification](#Landuse)
 
 
-## Rock
+## Landuse
 
 1. The RGB Landsat8 images are downloaded from [EarthExplorer](https://earthexplorer.usgs.gov/)
    1. On **Enter Search Criteria** select your reference area (by adding coordinates, shapefiles, etc)
