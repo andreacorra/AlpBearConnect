@@ -1,6 +1,16 @@
 This folder containes the codes used to prepare the variables.
 
+* [Study area](#Studyarea)
 * [Land use classification](#Landuse)
+
+## Studyarea
+For ecological and management reasons, the study area in the Alps has been selected accroding to the following criteria:  
+1. An area large enough to produce biologically meaningful results (Center/Eastern Alps);
+2. An area environmentally meaningful for the presence (and future expansion) of the bear ([Alpine Convention](http://www.alpconv.org/it/convention/default.html) area);
+3. An area administratively homogeneous (Italy).
+
+For these reasons, the area selected is the intersection between the Alpine Convetion area, and the Italian regions of Lombardia, Trentino Alto Adige, Veneto e Friuli Venezia Giulia.
+
 
 
 ## Landuse
