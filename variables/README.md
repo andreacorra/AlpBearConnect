@@ -27,4 +27,4 @@ This folder containes the codes used to prepare the variables.
 "rock@3"   >=  80  AND
 "rock@3"   <=  200
 ```
-The first band (@1), corrisponds to the Red band, the second to the Green band, and the third to the Blue band.
+The first band (@1), corresponds to the Red band, the second to the Green band, and the third to the Blue band.
