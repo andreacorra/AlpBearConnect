@@ -1,7 +1,9 @@
-This folder containes the codes used to prepare the variables.
+This folder containes the procedures and codes used to prepare the spatial information for:
 
 * [Study area](#Studyarea)
 * [Land use classification](#Landuse)
+* [Forest cover](#Forest)
+
 
 ## Studyarea
 For ecological and management reasons, the study area in the Alps has been selected accroding to the following criteria:  
@@ -35,4 +37,13 @@ For these reasons, the area selected is the intersection between the Alpine Conv
 "rock@3"   >=  75  AND
 "rock@3"   <=  200
 ```
-The first band (@1), corresponds to the Red band, the second to the Green band, and the third to the Blue band.
+The first band (@1), corresponds to the Red band, the second to the Green band, and the third to the Blue band.  
+
+
+## Forest
+
+The forest presence in the landscape has been derived using the [Copernicus layer](https://land.copernicus.eu/pan-european/high-resolution-layers/forests). In detail:  
+1. Tree cover density (TCD) and the Forest type product (FTY) layers are downloaded for the reference area;
+2. Using raster calculator a new layer is generated, taking into consideration the non-urban and non-orchard tree associations;
+3. ...
+
