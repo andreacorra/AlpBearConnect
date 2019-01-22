@@ -3,7 +3,8 @@ This folder containes the procedures and codes used to prepare the spatial infor
 * Selection of the [study area](#Study_area)
 * [Buffer](#Buffer)
 * [Forest cover](#Forest)
-* 
+* [Elevation](#Elevation)
+* [Transitional woodland-shrub](#Shrub)
 * [Land use classification](#Land_use)
 
 
@@ -42,6 +43,13 @@ The forest presence in the landscape has been derived using the [Copernicus fore
       ```
    With the following function, if *non_forest_TCD* is *NOT* 1 (i.e. 0), then it returns 1, which is then multiplied by   percentage of cover. The resulting map is a Tree Cover Density (0 to 100) without non-urban and non-agricultural tree associations.
 
+
+## Elevation
+The elevation has been derived from the EU [Digital Elevation Model](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1). All the corresponding derived variables (slope, aspect, etc) are derived with the function *terrain()* in the package [raster](https://cran.r-project.org/web/packages/raster/index.html).
+
+
+## Shrub
+The Transitional woodland-shrublands are derived in 
 
 
 # EXTRA:
