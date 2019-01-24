@@ -4,6 +4,7 @@ This folder containes the procedures and codes used to prepare the spatial infor
 * [Buffer](#Buffer)
 * [Forest cover](#Forest)
 * [Elevation](#Elevation)
+* [Human settlment](#Human_settlement)
 * [Transitional woodland-shrub](#Shrub)
 * [Land use classification](#Land_use)
 
@@ -46,6 +47,14 @@ The forest presence in the landscape has been derived using the [Copernicus fore
 
 ## Elevation
 The elevation has been derived from the EU [Digital Elevation Model](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1). All the corresponding derived variables (slope, aspect, etc) are derived with the function *terrain()* in the package [raster](https://cran.r-project.org/web/packages/raster/index.html).
+
+
+## Human_settlement
+The human settlement has been derived from the EU [European Settlement Map](https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green). For analysis purposes the higher resolution (2.5 m) has been chosen, as it will then be reduced as needed. There are many tiles componing the study area, so in sequence:  
+1. All the tiles were downloaded form the website;
+2. The tiles were clipped using the buffered study area layer;
+3. The clipped files were merged as to compose the final raster file.
+4. (Be aware that the final raster file is **very** large, so it could be a good idea to run the analysis if large disk space is available)
 
 
 ## Shrub
