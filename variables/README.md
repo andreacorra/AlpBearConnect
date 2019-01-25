@@ -70,7 +70,6 @@ The Transitional woodland-shrublands are derived in (...)
 ## River  
 1. Inland Water
 2. River_net_I
-3. River_net_P
 
 
 ## Grassland
