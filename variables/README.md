@@ -2,10 +2,13 @@ This folder containes the procedures and codes used to prepare the spatial infor
 
 * Selection of the [study area](#Study_area)
 * [Buffer](#Buffer)
-* [Forest cover](#Forest)
 * [Elevation](#Elevation)
-* [Human settlment](#Human_settlement)
+* [Forest cover](#Forest)
 * [Transitional woodland-shrub](#Shrub)
+* [Grassland](#Grassland)
+* [Human settlment](#Human_settlement)
+
+EXTRA:
 * [Land use classification](#Land_use)
 
 
@@ -21,6 +24,10 @@ For these reasons, the area selected is the intersection between the Alpine Conv
 ## Buffer
 
 A buffer of 5 km is built around the study area, in order to avoid the 'edge effect' while calculating distances from land types (i.e. human settlments just outside the study area will not be seen without a buffer). There are a set of functions eihter in R and QGIS to calculate the buffer.  
+
+
+## Elevation
+The elevation has been derived from the EU [Digital Elevation Model](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1). All the corresponding derived variables (slope, aspect, etc) are derived with the function *terrain()* in the package [raster](https://cran.r-project.org/web/packages/raster/index.html).
 
 
 ## Forest
@@ -45,8 +52,11 @@ The forest presence in the landscape has been derived using the [Copernicus fore
    With the following function, if *non_forest_TCD* is *NOT* 1 (i.e. 0), then it returns 1, which is then multiplied by   percentage of cover. The resulting map is a Tree Cover Density (0 to 100) without non-urban and non-agricultural tree associations.
 
 
-## Elevation
-The elevation has been derived from the EU [Digital Elevation Model](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1). All the corresponding derived variables (slope, aspect, etc) are derived with the function *terrain()* in the package [raster](https://cran.r-project.org/web/packages/raster/index.html).
+## Shrub
+The Transitional woodland-shrublands are derived in (...)
+
+
+## Grassland
 
 
 ## Human_settlement
@@ -55,10 +65,6 @@ The human settlement has been derived from the EU [European Settlement Map](http
 2. The tiles were clipped using the buffered study area layer;
 3. The clipped files were merged as to compose the final raster file.
 4. (Be aware that the final raster file is **very** large, so it could be a good idea to run the analysis if large disk space is available)
-
-
-## Shrub
-The Transitional woodland-shrublands are derived in 
 
 
 # EXTRA:
@@ -85,7 +91,4 @@ The Transitional woodland-shrublands are derived in
 "rock@3"   >=  75  AND
 "rock@3"   <=  200
 ```
-The first band (@1), corresponds to the Red band, the second to the Green band, and the third to the Blue band.  
-
-
-
+The first band (@1), corresponds to the Red band, the second to the Green band, and the third to the Blue band.
