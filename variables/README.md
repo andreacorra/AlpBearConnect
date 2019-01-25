@@ -5,8 +5,10 @@ This folder containes the procedures and codes used to prepare the spatial infor
 * [Elevation](#Elevation)
 * [Forest cover](#Forest)
 * [Transitional woodland-shrub](#Shrub)
+* [Rock](#Rock)
+* [River](#River)
 * [Grassland](#Grassland)
-* [Human settlment](#Human_settlement)
+* [Human settlement](#Human_settlement)
 
 EXTRA:
 * [Land use classification](#Land_use)
@@ -26,7 +28,7 @@ For these reasons, the area selected is the intersection between the Alpine Conv
 
 ## Buffer
 
-A buffer of 5 km is built around the study area, in order to avoid the 'edge effect' while calculating distances from land types (i.e. human settlments just outside the study area will not be seen without a buffer). There are a set of functions eihter in R and QGIS to calculate the buffer.  
+A buffer of 5 km is built around the study area, in order to avoid the 'edge effect' while calculating distances from land types (i.e. human settlments just outside the study area will not be seen without a buffer). The buffer has been calcualted with the QGIS buffer function, with a buffer distance set to **5000 m**.
 
 
 ## Elevation
@@ -35,7 +37,7 @@ The elevation has been derived from the EU [Digital Elevation Model](https://lan
 
 ## Forest
 
-The forest presence in the landscape has been derived using the [Copernicus forest layers](https://land.copernicus.eu/pan-european/high-resolution-layers/forests) and the Corine Land Cover vector [data](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012). In detail:  
+The forest presence in the landscape has been derived using the [Copernicus forest layers](https://land.copernicus.eu/pan-european/high-resolution-layers/forests) (tile E40N20) and the Corine Land Cover vector [data](https://land.copernicus.eu/pan-european/corine-land-cover/clc-2012). In detail:  
 1. Tree cover density (TCD), Forest type product (FTY), and Corine Land Cover (CLC) vector layers are downloaded for the reference area;
 2. The CLC vector is rasterized to match the Copernicus resolution (20 m);
 3. Given the aim of the study, two layers have been derived:  
@@ -57,6 +59,18 @@ The forest presence in the landscape has been derived using the [Copernicus fore
 
 ## Shrub
 The Transitional woodland-shrublands are derived in (...)
+
+
+## Rock
+1. Loaded from <website> link (types loaded);
+2. New column with value 1
+3. dissolve geometry by the new column value
+
+
+## River  
+1. Inland Water
+2. River_net_I
+3. River_net_P
 
 
 ## Grassland
