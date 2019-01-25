@@ -21,6 +21,9 @@ For ecological and management reasons, the study area in the Alps has been selec
 For these reasons, the area selected is the intersection between the Alpine Convetion area, and the Italian regions of Lombardia, Trentino Alto Adige, Veneto e Friuli Venezia Giulia. The generated shapefile is found [here](https://github.com/andreacorra/AlpBearConnect/tree/master/variables/alpconv)
 
 
+![Study area](https://github.com/andreacorra/AlpBearConnect/blob/master/variables/study_area_alp.png)
+
+
 ## Buffer
 
 A buffer of 5 km is built around the study area, in order to avoid the 'edge effect' while calculating distances from land types (i.e. human settlments just outside the study area will not be seen without a buffer). There are a set of functions eihter in R and QGIS to calculate the buffer.  
