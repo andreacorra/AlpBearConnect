@@ -6,7 +6,7 @@ This folder containes the procedures and codes used to prepare the spatial infor
 * [Forest cover](#Forest)
 * [Transitional woodland-shrub](#Shrub)
 * [Rock](#Rock)
-* [River](#River)
+* [River](#Water_bodies)
 * [Grassland](#Grassland)
 * [Human settlement](#Human_settlement)
 
@@ -58,24 +58,43 @@ The forest presence in the landscape has been derived using the [Copernicus fore
 
 
 ## Shrub
+(add better description)
+
 The Transitional woodland-shrublands are derived in (...)
 
 
 ## Rock
+(add better description)
+
 1. Loaded from <website> link (types loaded);
 2. New column with value 1
 3. dissolve geometry by the new column value
 
 
-## River  
-1. Inland Water
-2. River_net_I
+## Water_bodies
+(add better description)
+
+The water bodies were retrived from two different sources: [EU-Hydro]() and [Open Street Map](). The first source contains the complete network of rivers and lakes for the main European watersheds (Danube, Po, etc), while the second source contains a detailed mapping of the inland water bodies (lakes). We paired the OpenStreetMap data with the EU dataset because the accurancy for the inland water body was higher. This information was thus used for retrive the water bodies distributuion in the reference area, as well as crop all the 'noise' derived from the water bodies within pastures.  
+
+* Inland Water
+   1. The OSM data is downloaded (GeoJSON file);
+   2. A new column containing the value 1 (as integer) is generated for the subsequent rasterization;
+   3. The layers are merged using the 'Merge vector layers' function...
+   4. The layer is rasterized...
+   5. The generated layer is clipped by mask layer (the bufferede reference area)
+   6. Ready to go...
+
+
+* River_net_I
+   1. 
 
 
 ## Grassland
+(add better description)
 
 
 ## Human_settlement
+
 The human settlement has been derived from the EU [European Settlement Map](https://land.copernicus.eu/pan-european/GHSL/european-settlement-map/esm-2012-release-2017-urban-green). For analysis purposes the higher resolution (2.5 m) has been chosen, as it will then be reduced as needed. There are many tiles componing the study area, so in sequence:  
 1. All the tiles were downloaded form the website;
 2. The tiles were clipped using the buffered study area layer;
