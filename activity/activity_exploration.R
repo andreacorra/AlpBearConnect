@@ -19,24 +19,32 @@ library(data.table)
 drv <- dbDriver("PostgreSQL") # Establish connection to PoststgreSQL using RPostgreSQL
 con <- dbConnect(drv, dbname="bear_db",host="eurodeer2.fmach.it", port=5432, 
                  user="*****", password="*****")
+saving_dir <- "/home/andreacorra/Desktop/"
 
 
 
 
 
-
-# ACCELEROMETER data exploration
+# ACCELEROMETER data loading
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # code used derives from http://shinezhou9.github.io/RepData_PeerAssessment1/ 
 actdata <- as.data.table(
   dbGetQuery(con,"SELECT * FROM main.activity_data_animals
                   WHERE activity_validity_code = 1 AND
-                  activity_sensor_mode_code = 1;")) 
+                  activity_sensor_mode_code = 1;"))
+dbDisconnect(con)
+
 head(actdata)
 str(actdata)
 
 
+
+
+
+
 # Data Processing // Daily activity pattern 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 ## Set interval at which accelerometer data were recorded 
 # rounded_time <- round_date(actdata$acquisition_time, unit = "5 minutes")
 actdata$interval <- as.factor(format(actdata$acquisition_time, '%H:%M'))
@@ -77,13 +85,17 @@ p2 <-
 
 ## Arranging plots together
 grid_1 <- grid.arrange(p1, p2, nrow = 2)
-ggsave("daily_act_bear.png", path = "/home/andreacorra/Desktop/", grid_1,
+ggsave("daily_act_bear.png", path = saving_dir, grid_1,
        width = 35, height = 20, units = "cm")
 
 
 
 
-# Data Processing // weekly activity pattern
+
+
+# Data Processing // yearly (by week) activity pattern 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 ## Set interval at which accelerometer data were recorded 
 actdata$interval_w <- week(actdata$acquisition_time)
 
@@ -100,7 +112,7 @@ avg_p_week <- ggplot(avg_weekly_act, aes(x = time, y = ave_steps))
 p3 <-
   avg_p_week +
   geom_line(colour = "darkorchid3", size = .7) +
-  labs(x = "week", y = "Activity", title = "Average Weekly Activity Pattern") +
+  labs(x = "week", y = "Activity", title = "Average Yearly Activity Pattern") +
   geom_text(x=2, y=55, label="Winter", size = 7) +  
   geom_vline(xintercept = 9, linetype="dashed") +
   geom_text(x=12, y=55, label="Spring", size = 7) +
@@ -118,7 +130,7 @@ med_p_week <- ggplot(med_weekly_act, aes(x = time, y = ave_steps))
 p4 <-
   med_p_week +
   geom_line(colour = "darkslategray4", size = .7) +
-  labs(x = "week", y = "Activity", title = "Median Weekly Activity Pattern") +
+  labs(x = "week", y = "Activity", title = "Median Yearly Activity Pattern") +
   geom_text(x=2, y=61, label="Winter", size = 7) +  
   geom_vline(xintercept = 9, linetype="dashed") +
   geom_text(x=12, y=61, label="Spring", size = 7) +
@@ -132,13 +144,17 @@ p4 <-
 
 ## Arranging plots together
 grid_2 <- grid.arrange(p3, p4, nrow = 2)
-ggsave("weekly_act_bear.png", path = "/home/andreacorra/Desktop/", grid_2,
+ggsave("yearly_w_act_bear.png", path = saving_dir, grid_2,
        width = 35, height = 20, units = "cm")
 
 
 
 
-# Data Processing // Weekly activity pattern 
+
+
+# Data Processing // yearly (by day) activity pattern
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 ## Set interval at which accelerometer data were recorded 
 actdata$interval_y <- yday(actdata$acquisition_time)
 
@@ -171,7 +187,7 @@ p5 <-
   geom_text(x=258, y=yy, label="Sep", size=7)+ geom_vline(xintercept=274, linetype=lt) +
   geom_text(x=289, y=yy, label="Oct", size=7)+ geom_vline(xintercept=305, linetype=lt) +
   geom_text(x=319, y=yy, label="Nov", size=7)+ geom_vline(xintercept=335, linetype=lt) +
-  geom_text(x=350, y=yy, label="Dec", size=7)+ geom_vline(xintercept=365, linetype=lt)
+  geom_text(x=350, y=yy, label="Dec", size=7)
 
 
 ## Median activity
@@ -195,10 +211,77 @@ p6 <-
   geom_text(x=258, y=yz, label="Sep", size=7)+ geom_vline(xintercept=274, linetype=lt) +
   geom_text(x=289, y=yz, label="Oct", size=7)+ geom_vline(xintercept=305, linetype=lt) +
   geom_text(x=319, y=yz, label="Nov", size=7)+ geom_vline(xintercept=335, linetype=lt) +
-  geom_text(x=350, y=yz, label="Dec", size=7)+ geom_vline(xintercept=365, linetype=lt)
+  geom_text(x=350, y=yz, label="Dec", size=7)
 
 
 ## Arranging plots together
 grid_3 <- grid.arrange(p5, p6, nrow = 2)
-ggsave("yearly_act_bear.png", path = "/home/andreacorra/Desktop/", grid_3,
+ggsave("yearly_d_act_bear.png", path = saving_dir, grid_3,
        width = 35, height = 20, units = "cm")
+
+
+
+
+
+
+# Data Processing // yearly (by week) activity pattern 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+## Set interval at which accelerometer data were recorded 
+actdata$interval_ww <- paste(wday(actdata$acquisition_time),
+                             as.factor(format(actdata$acquisition_time, '%H:%M')),
+                             sep = "_")
+
+
+## Calculate mean and median total activity per time interval
+t_pattern_ww <- split(actdata, actdata$interval_ww) 
+average_act_ww <- sapply(t_pattern_ww, function(x) mean(x$act_1, na.rm = TRUE))
+median_act_ww <- sapply(t_pattern_ww, function(x) median(x$act_1, na.rm = TRUE))
+
+
+## Average activity 
+avg_wweekly_act <- data.frame(time = c(1:2016), ave_steps = average_act_ww)
+avg_p_wweek <- ggplot(avg_wweekly_act, aes(x = time, y = ave_steps))
+
+yy <- 62
+lt <- "dashed"
+
+p7 <-
+  avg_p_wweek +
+  geom_line(colour = "chocolate3", size = .7) +
+  labs(x= "hour of the week", y= "Activity", title= "Average weekly Activity Pattern") +
+  geom_text(x=144,  y=yy, label="Mon", size=7)+ geom_vline(xintercept=288,  linetype=lt) +
+  geom_text(x=432,  y=yy, label="Tue", size=7)+ geom_vline(xintercept=576,  linetype=lt) +
+  geom_text(x=720,  y=yy, label="Wed", size=7)+ geom_vline(xintercept=864,  linetype=lt) +
+  geom_text(x=1008, y=yy, label="Thu", size=7)+ geom_vline(xintercept=1152, linetype=lt) +
+  geom_text(x=1296, y=yy, label="Fri", size=7)+ geom_vline(xintercept=1440, linetype=lt) +
+  geom_text(x=1584, y=yy, label="Sat", size=7)+ geom_vline(xintercept=1728, linetype=lt) +
+  geom_text(x=1872, y=yy, label="Sun", size=7)
+
+
+## Median activity
+med_wweekly_act <- data.frame(time = c(1:2016), ave_steps = median_act_ww)
+med_p_wweek <- ggplot(med_wweekly_act, aes(x = time, y = ave_steps))
+
+yz <- 70
+
+p8 <-
+  med_p_wweek +
+  geom_line(colour = "aquamarine3", size = .7) +
+  labs(x = "hour of the week", y = "Activity", title = "Median Weekly Activity Pattern") +
+  geom_text(x=144,  y=yz, label="Mon", size=7)+ geom_vline(xintercept=288,  linetype=lt) +
+  geom_text(x=432,  y=yz, label="Tue", size=7)+ geom_vline(xintercept=576,  linetype=lt) +
+  geom_text(x=720,  y=yz, label="Wed", size=7)+ geom_vline(xintercept=864,  linetype=lt) +
+  geom_text(x=1008, y=yz, label="Thu", size=7)+ geom_vline(xintercept=1152, linetype=lt) +
+  geom_text(x=1296, y=yz, label="Fri", size=7)+ geom_vline(xintercept=1440, linetype=lt) +
+  geom_text(x=1584, y=yz, label="Sat", size=7)+ geom_vline(xintercept=1728, linetype=lt) +
+  geom_text(x=1872, y=yz, label="Sun", size=7)  
+  
+  
+
+## Arranging plots together
+grid_4 <- grid.arrange(p7, p8, nrow = 2)
+ggsave("weekly_act_bear.png", path = saving_dir, grid_4,
+       width = 35, height = 20, units = "cm")
+                        
+                        
