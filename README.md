@@ -2,8 +2,7 @@ This repository includes codes and functions used in the AlpBearConnect project.
 
 R-code repository for the manuscript [Human-induced risk drives behavioural decisions in a recovering brown bear population](https://github.com/andreacorra/AlpBearConnect/tree/master/risk_analysis)
 
-<p>  </p>
-<p>  </p>
+<br><br>
 
 Other repositories:
 * [Environmental variables](https://github.com/andreacorra/AlpBearConnect/tree/master/variables)
